@@ -6,20 +6,26 @@ $url = explode('?', $uri);
 
 $url = preg_replace('/\/router\//i', '', $url[0]);
 
-function get(){
-
-	$queString = preg_replace('/(.*)[\?]/i', ' ', $GLOBALS['uri']);
-
-	$queS1 = explode('&', $queString);
-
-for($i = 0;$i < count($queS1); $i++){
-	$off = preg_replace('/\w+(?=\=)/i', ' ', $queS1[$i]);
-	$off2 = preg_replace('/=/i', ' ', $off);
-	$val = preg_replace('/(?<=\=)\w+/i', ' ', $queS1[$i]);
-	$val2 = preg_replace('/=/i', ' ', $val);
-	$queS2[$val2] = $off2;	
+function get($var){
+	if($_GET[$var]){
+		$tvar = $_GET[$var];
+		$nvar = filter_var($tvar);
+		return $nvar;
+	}
+	else{
+		echo 'variable did\'nt exist';
+	}
 }
-	return $queS2;
+
+function post($var){
+	if($_POST[$var]){
+		$tvar = $_POST[$var];
+		$nvar = filter_var($tvar);
+		return $nvar;
+	}
+	else{
+		echo 'variable did\'nt exist';
+	}
 }
 
 //$url_sliced = implode( '/', $_GET['url'] );
